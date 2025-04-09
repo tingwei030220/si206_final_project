@@ -2,8 +2,8 @@ import requests
 import sqlite3
 import time
 
-YELP_API_KEY = "lbEKg6rEZprNw5LJL-B2IykMIbn0bofe3ZOa4WAYQTWru2frI5zbi8ogV865woI0tAgtUQw9pxDrL38aWzqpplD4l9lJCcmU6vKAmFyCL2fp_Fjx6iUIf-cDZKbkZ3Yx"
-RENCAST_API_KEY = "784c4ab04d6d4d43b3a02e3baf266911"
+YELP_API_KEY = "HIDE"
+RENCAST_API_KEY = "HIDE"
 
 YELP_URL = "https://api.yelp.com/v3/businesses/search"
 YELP_HEADERS = {"Authorization": f"Bearer {YELP_API_KEY}"}
@@ -79,7 +79,7 @@ def fetch_yelp_data(city, max_calls=1):
                 biz_city = location.get("city", "").strip()
                 if biz_city not in VALID_CITIES:
                     continue
-                
+
                 zip_code = location.get("zip_code", "")
                 rating = biz.get("rating", 0.0)
                 review_count = biz.get("review_count", 0)
