@@ -294,27 +294,10 @@ def run_all():
 
     print("Data gathering complete.")
 
-#############################################
-# 7. Calculate Average Rent and Export to CSV
-#############################################
-
-def export_average_rent():
-    query = """
-    SELECT c.city_id, c.city_name, AVG(r.price) AS average_rent
-    FROM Rent r
-    JOIN City c ON r.city_id = c.city_id
-    GROUP BY c.city_id, c.city_name
-    """
-    df = pd.read_sql_query(query, conn)
-    csv_filename = "average_rent.csv"
-    df.to_csv(csv_filename, index=False)
-    print(f"Average rent per city exported to {csv_filename}")
-
 ############################################################
-# 8. Run Everything and Close Connection (No Table Dropping)
+# 7. Run Everything and Close Connection (No Table Dropping)
 ############################################################
 if __name__ == "__main__":
     run_all()
-    export_average_rent()
     conn.close()
     print("Done!")
