@@ -162,26 +162,26 @@ def get_property_id(property_type):
         return cur.lastrowid
 
 #################################################################
-# 5. Data Collection Functions (25 items per run using Offset)
+# 5. Data Collection Functions (8 items per run using Offset)
 #################################################################
 
-# (A) Yelp Data Collection – Add 25 new restaurants for the given city.
+# (A) Yelp Data Collection – Add 8 new restaurants for the given city.
 def fetch_yelp_data_for_city(city_name):
     """
-    Retrieve 25 new Yelp restaurant records for a given city 
+    Retrieve 8 new Yelp restaurant records for a given city 
     based on the current number of rows in Restaurants (using city_id).
     """
     city_id = city_mapping[city_name]
     state = CITIES[city_name]["state"]
     cur.execute("SELECT COUNT(*) FROM Restaurants WHERE city_id = ?", (city_id,))
     current_count = cur.fetchone()[0]
-    offset = current_count  # each run adds the next 25 records
-    print(f"[Yelp] {city_name}: Current count = {current_count}. Fetching next 25 records (offset = {offset}).")
+    offset = current_count  # each run adds the next 8 records
+    print(f"[Yelp] {city_name}: Current count = {current_count}. Fetching next 8 records (offset = {offset}).")
     
     params = {
         "term": "restaurants",
         "location": f"{city_name}, {state}",
-        "limit": 25,
+        "limit": 8,
         "offset": offset,
         "radius": 5000
     }
@@ -228,10 +228,10 @@ def fetch_yelp_data_for_city(city_name):
     conn.commit()
     time.sleep(1)
 
-# (B) RentCast Data Collection – Add 25 new rental listings for a given city.
+# (B) RentCast Data Collection – Add 8 new rental listings for a given city.
 def fetch_rentcast_data_for_city(city_name):
     """
-    Retrieve 25 new rental listings from RentCast for the given city based on
+    Retrieve 8 new rental listings from RentCast for the given city based on
     the current count in the Rent table (using city_id).
     """
     city_id = city_mapping[city_name]
@@ -239,12 +239,12 @@ def fetch_rentcast_data_for_city(city_name):
     cur.execute("SELECT COUNT(*) FROM Rent WHERE city_id = ?", (city_id,))
     current_count = cur.fetchone()[0]
     offset = current_count
-    print(f"[RentCast] {city_name}: Current Rent count = {current_count}. Fetching next 25 records (offset = {offset}).")
+    print(f"[RentCast] {city_name}: Current Rent count = {current_count}. Fetching next 8 records (offset = {offset}).")
     
     params = {
         "city": city_name,
         "state": state,
-        "limit": 25,
+        "limit": 8,
         "offset": offset
     }
 
@@ -282,7 +282,7 @@ def fetch_rentcast_data_for_city(city_name):
 
 
 #################################################################
-# 6. Main Routine – Add 25 New Data Points per Run for Each City
+# 6. Main Routine – Add 8 New Data Points per Run for Each City
 #################################################################
 
 def run_all():
